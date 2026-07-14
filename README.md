@@ -27,7 +27,7 @@ The backend provides functionality for:
 # Base URL
 
 ```
-/api/v1
+
 ```
 
 ---
