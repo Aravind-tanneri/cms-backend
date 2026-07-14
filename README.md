@@ -20,9 +20,7 @@ The backend provides functionality for:
 * Node.js
 * Express.js
 * MongoDB
-* Mongoose
 * JWT Authentication
-* Refresh Token Authentication
 
 ---
 
