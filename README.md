@@ -187,6 +187,80 @@ Represents announcements visible to a group.
 
 ---
 
+# API Overview
+
+The API follows REST principles and is organized into feature-based resources.
+
+---
+
+## Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register a new user account. |
+| POST | `/api/auth/login` | Authenticate a user and issue access/refresh tokens. |
+| POST | `/api/auth/logout` | Invalidate the current session or refresh token. |
+| POST | `/api/auth/refresh` | Generate a new access token using a valid refresh token. |
+
+---
+
+## Subject Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/subjects` | Retrieve all subjects available to the authenticated user. |
+| GET | `/api/subjects/:subjectId` | Retrieve details of a specific subject. |
+| POST | `/api/subjects` | Create a new subject. |
+| PUT | `/api/subjects/:subjectId` | Update an existing subject. |
+| DELETE | `/api/subjects/:subjectId` | Delete a subject. |
+
+---
+
+## Period Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/periods` | Retrieve all periods available to the authenticated user. |
+| GET | `/api/periods/:periodId` | Retrieve details of a specific period. |
+| GET | `/api/subjects/:subjectId/periods` | Retrieve all periods belonging to a subject. |
+| POST | `/api/subjects/:subjectId/periods` | Create a new period for a subject. |
+| PUT | `/api/periods/:periodId` | Update an existing period. |
+| DELETE | `/api/periods/:periodId` | Delete a period. |
+
+---
+
+## Attendance
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/attendance` | Retrieve attendance information for the authenticated user. |
+| GET | `/api/subjects/:subjectId/attendance` | Retrieve attendance summary for a subject. |
+| GET | `/api/periods/:periodId/attendance` | Retrieve attendance records for a specific period. |
+| POST | `/api/periods/:periodId/attendance` | Mark attendance for a period. |
+| DELETE | `/api/periods/:periodId/attendance/:userId` | Remove a user's attendance record from a period. |
+
+---
+
+## Announcements
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/announcements` | Retrieve all announcements for the authenticated user's group. |
+| POST | `/api/announcements` | Create a new announcement. |
+| PUT | `/api/announcements/:announcementId` | Update an existing announcement. |
+| DELETE | `/api/announcements/:announcementId` | Delete an announcement. |
+
+---
+
+## User
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/users/me` | Retrieve the authenticated user's profile. |
+| PUT | `/api/users/me` | Update the authenticated user's profile. |
+
+---
+
 # API Endpoints
 
 ---
