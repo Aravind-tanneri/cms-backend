@@ -197,10 +197,10 @@ The API follows REST principles and is organized into feature-based resources.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/auth/register` | Register a new user account. |
-| POST | `/api/auth/login` | Authenticate a user and issue access/refresh tokens. |
-| POST | `/api/auth/logout` | Invalidate the current session or refresh token. |
-| POST | `/api/auth/refresh` | Generate a new access token using a valid refresh token. |
+| POST | `/api/v1/auth/register` | Register a new user account. |
+| POST | `/api/v1/auth/login` | Authenticate a user and issue access/refresh tokens. |
+| POST | `/api/v1/auth/logout` | Invalidate the current session or refresh token. |
+| POST | `/api/v1/auth/refresh` | Generate a new access token using a valid refresh token. |
 
 ---
 
@@ -208,11 +208,11 @@ The API follows REST principles and is organized into feature-based resources.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/subjects` | Retrieve all subjects available to the authenticated user. |
-| GET | `/api/subjects/:subjectId` | Retrieve details of a specific subject. |
-| POST | `/api/subjects` | Create a new subject. |
-| PUT | `/api/subjects/:subjectId` | Update an existing subject. |
-| DELETE | `/api/subjects/:subjectId` | Delete a subject. |
+| GET | `/api/v1/subjects` | Retrieve all subjects available to the authenticated user. |
+| GET | `/api/v1/subjects/:subjectId` | Retrieve details of a specific subject. |
+| POST | `/api/v1/subjects` | Create a new subject. |
+| PUT | `/api/v1/subjects/:subjectId` | Update an existing subject. |
+| DELETE | `/api/v1/subjects/:subjectId` | Delete a subject. |
 
 ---
 
@@ -220,12 +220,12 @@ The API follows REST principles and is organized into feature-based resources.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/periods` | Retrieve all periods available to the authenticated user. |
-| GET | `/api/periods/:periodId` | Retrieve details of a specific period. |
-| GET | `/api/subjects/:subjectId/periods` | Retrieve all periods belonging to a subject. |
-| POST | `/api/subjects/:subjectId/periods` | Create a new period for a subject. |
-| PUT | `/api/periods/:periodId` | Update an existing period. |
-| DELETE | `/api/periods/:periodId` | Delete a period. |
+| GET | `/api/v1/periods` | Retrieve all periods available to the authenticated user. |
+| GET | `/api/v1/periods/:periodId` | Retrieve details of a specific period. |
+| GET | `/api/v1/subjects/:subjectId/periods` | Retrieve all periods belonging to a subject. |
+| POST | `/api/v1/subjects/:subjectId/periods` | Create a new period for a subject. |
+| PUT | `/api/v1/periods/:periodId` | Update an existing period. |
+| DELETE | `/api/v1/periods/:periodId` | Delete a period. |
 
 ---
 
@@ -233,11 +233,11 @@ The API follows REST principles and is organized into feature-based resources.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/attendance` | Retrieve attendance information for the authenticated user. |
-| GET | `/api/subjects/:subjectId/attendance` | Retrieve attendance summary for a subject. |
-| GET | `/api/periods/:periodId/attendance` | Retrieve attendance records for a specific period. |
-| POST | `/api/periods/:periodId/attendance` | Mark attendance for a period. |
-| DELETE | `/api/periods/:periodId/attendance/:userId` | Remove a user's attendance record from a period. |
+| GET | `/api/v1/attendance` | Retrieve attendance information for the authenticated user. |
+| GET | `/api/v1/subjects/:subjectId/attendance` | Retrieve attendance summary for a subject. |
+| GET | `/api/v1/periods/:periodId/attendance` | Retrieve attendance records for a specific period. |
+| POST | `/api/v1/periods/:periodId/attendance` | Mark attendance for a period. |
+| DELETE | `/api/v1/periods/:periodId/attendance/:userId` | Remove a user's attendance record from a period. |
 
 ---
 
@@ -245,10 +245,10 @@ The API follows REST principles and is organized into feature-based resources.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/announcements` | Retrieve all announcements for the authenticated user's group. |
-| POST | `/api/announcements` | Create a new announcement. |
-| PUT | `/api/announcements/:announcementId` | Update an existing announcement. |
-| DELETE | `/api/announcements/:announcementId` | Delete an announcement. |
+| GET | `/api/v1/announcements` | Retrieve all announcements for the authenticated user's group. |
+| POST | `/api/v1/announcements` | Create a new announcement. |
+| PUT | `/api/v1/announcements/:announcementId` | Update an existing announcement. |
+| DELETE | `/api/v1/announcements/:announcementId` | Delete an announcement. |
 
 ---
 
@@ -256,8 +256,8 @@ The API follows REST principles and is organized into feature-based resources.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/users/me` | Retrieve the authenticated user's profile. |
-| PUT | `/api/users/me` | Update the authenticated user's profile. |
+| GET | `/api/v1/users/me` | Retrieve the authenticated user's profile. |
+| PUT | `/api/v1/users/me` | Update the authenticated user's profile. |
 
 ---
 
@@ -272,7 +272,7 @@ The API follows REST principles and is organized into feature-based resources.
 ## Register
 
 ```
-POST /api/auth/register
+POST /api/v1/auth/register
 ```
 
 ### Authentication
@@ -302,7 +302,7 @@ Not Required
 ## Login
 
 ```
-POST /api/auth/login
+POST /api/v1/auth/login
 ```
 
 ### Authentication
@@ -332,7 +332,7 @@ Not Required
 ## Logout
 
 ```
-POST /api/auth/logout
+POST /api/v1/auth/logout
 ```
 
 ### Authentication
@@ -358,7 +358,7 @@ Required
 ## Refresh Token
 
 ```
-POST /api/auth/refresh
+POST /api/v1/auth/refresh
 ```
 
 ### Authentication
@@ -388,7 +388,7 @@ Refresh Token Required
 ## Get Subject
 
 ```
-GET /api/subjects/:subjectId
+GET /api/v1/subjects/:subjectId
 ```
 
 ### Authentication
@@ -413,7 +413,7 @@ subjectId
 ## Get Subjects
 
 ```
-GET /api/subjects
+GET /api/v1/subjects
 ```
 
 ### Authentication
@@ -438,7 +438,7 @@ Required
 ## Create Subject
 
 ```
-POST /api/subjects
+POST /api/v1/subjects
 ```
 
 ### Authentication
@@ -464,7 +464,7 @@ Required
 ## Update Subject
 
 ```
-PUT /api/subjects/:subjectId
+PUT /api/v1/subjects/:subjectId
 ```
 
 ### Authentication
@@ -490,7 +490,7 @@ Required
 ## Delete Subject
 
 ```
-DELETE /api/subjects/:subjectId
+DELETE /api/v1/subjects/:subjectId
 ```
 
 ### Authentication
@@ -513,7 +513,7 @@ Required
 ## Get Period
 
 ```
-GET /api/periods/:periodId
+GET /api/v1/periods/:periodId
 ```
 
 ### Authentication
@@ -532,7 +532,7 @@ Required
 ## Get Periods
 
 ```
-GET /api/periods
+GET /api/v1/periods
 ```
 
 ### Authentication
@@ -551,7 +551,7 @@ Required
 ## Get Subject Periods
 
 ```
-GET /api/subjects/:subjectId/periods
+GET /api/v1/subjects/:subjectId/periods
 ```
 
 ### Authentication
@@ -570,7 +570,7 @@ Required
 ## Create Period
 
 ```
-POST /api/subjects/:subjectId/periods
+POST /api/v1/subjects/:subjectId/periods
 ```
 
 ### Authentication
@@ -596,7 +596,7 @@ Required
 ## Update Period
 
 ```
-PUT /api/periods/:periodId
+PUT /api/v1/periods/:periodId
 ```
 
 ### Authentication
@@ -622,7 +622,7 @@ Required
 ## Delete Period
 
 ```
-DELETE /api/periods/:periodId
+DELETE /api/v1/periods/:periodId
 ```
 
 ### Authentication
@@ -645,7 +645,7 @@ Required
 ## Get My Attendance
 
 ```
-GET /api/attendance
+GET /api/v1/attendance
 ```
 
 ### Authentication
@@ -664,7 +664,7 @@ Required
 ## Get Subject Attendance
 
 ```
-GET /api/subjects/:subjectId/attendance
+GET /api/v1/subjects/:subjectId/attendance
 ```
 
 ### Authentication
@@ -683,7 +683,7 @@ Required
 ## Get Period Attendance
 
 ```
-GET /api/periods/:periodId/attendance
+GET /api/v1/periods/:periodId/attendance
 ```
 
 ### Authentication
@@ -702,7 +702,7 @@ Required
 ## Mark Attendance
 
 ```
-POST /api/periods/:periodId/attendance
+POST /api/v1/periods/:periodId/attendance
 ```
 
 ### Authentication
@@ -728,7 +728,7 @@ Required
 ## Remove Attendance
 
 ```
-DELETE /api/periods/:periodId/attendance/:userId
+DELETE /api/v1/periods/:periodId/attendance/:userId
 ```
 
 ### Authentication
@@ -751,7 +751,7 @@ Required
 ## Get Announcements
 
 ```
-GET /api/announcements
+GET /api/v1/announcements
 ```
 
 ### Authentication
@@ -770,7 +770,7 @@ Required
 ## Create Announcement
 
 ```
-POST /api/announcements
+POST /api/v1/announcements
 ```
 
 ### Authentication
@@ -796,7 +796,7 @@ Required
 ## Update Announcement
 
 ```
-PUT /api/announcements/:announcementId
+PUT /api/v1/announcements/:announcementId
 ```
 
 ### Authentication
@@ -822,7 +822,7 @@ Required
 ## Delete Announcement
 
 ```
-DELETE /api/announcements/:announcementId
+DELETE /api/v1/announcements/:announcementId
 ```
 
 ### Authentication
@@ -845,7 +845,7 @@ Required
 ## Get Current User
 
 ```
-GET /api/users/me
+GET /api/v1/users/me
 ```
 
 ### Authentication
@@ -864,7 +864,7 @@ Required
 ## Update Current User
 
 ```
-PUT /api/users/me
+PUT /api/v1/users/me
 ```
 
 ### Authentication
