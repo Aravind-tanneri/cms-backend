@@ -1,9 +1,12 @@
 import { Router } from 'express';
-import { registerController, sendOtpController } from "../controllers/auth.controller.js";
+import {logInController, registerController, sendOtpController} from "../controllers/auth.controller.js";
 
 const authRouter = Router();
 
-authRouter.post('/register', registerController);
 authRouter.post('/send-otp', sendOtpController);
+authRouter.post('/register', registerController);
+authRouter.post('/login', logInController);
+authRouter.post('/logout-all', logInController);
+authRouter.post('/forgot-password', logInController);
 
 export default authRouter;

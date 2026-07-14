@@ -7,5 +7,7 @@ export const {
     DB_URI,
     CLIENT_URL,
     EMAIL,
-    APP_PASSWORD
+    APP_PASSWORD,
+    JWT_SECRET,
+    JWT_EXPIRES_IN
 } = process.env;

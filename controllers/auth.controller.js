@@ -5,6 +5,8 @@ import {sendOtpMail} from "../services/mail.services.js";
 import bcrypt from "bcrypt";
 import GroupModel from "../models/group.model.js";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET, JWT_EXPIRES_IN } from "../config/env.js";
 
 export const sendOtpController = async (req, res, next) => {
     try {
@@ -21,7 +23,7 @@ export const sendOtpController = async (req, res, next) => {
         await OtpModel.deleteOne({ email });
         await OtpModel.create({ email, otp: hashedOtp});
 
-        await sendOtpMail(email, otp);
+        await sendOtpMail(email, otp, "Sign Up");
 
         res.status(200).send({
             success: true,
@@ -66,24 +68,87 @@ export const registerController = async (req, res, next) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await UserModel.findById(newUser._id).session(session);
+        const newUser = new UserModel({
+            rollNo,
+            name,
+            email,
+            password: hashedPassword,
+            groupId: dbGroup._id,
+            role: "ROLE_USER"
+        });
+        await newUser.save({ session });
         await OtpModel.deleteOne({ email }, { session });
 
+        const token = jwt.sign({userId: newUser._id, role: newUser.role, tokenVersion: 1}, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN})
+
+        newUser.password = null;
+
         await session.commitTransaction();
+        await session.endSession()
 
         res.status(201).send({
             success: true,
             message: "User created successfully",
             data: {
+                token: token,
                 user: newUser,
             }
         })
     } catch (e) {
         await session.abortTransaction();
-        next(e);
-    } finally {
         await session.endSession()
+        next(e);
     }
 }
 
-// name, email, password, group, role
+export const logInController = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            throw new ApiError(400, "Email and password are required");
+        }
+
+        const user = await UserModel.findOne({ email }).select("+password");
+
+        if(!user) {
+            throw new ApiError(401, "Incorrect email or password");
+        }
+
+        const isCorrectPassword = await bcrypt.compare(password, user.password);
+        if(!isCorrectPassword) {
+            throw new ApiError(401, "Incorrect email or password");
+        }
+
+        const token = jwt.sign({userId: user._id, role: user.role, tokenVersion: user.tokenVersion}, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN});
+        user.password = null;
+
+        res.status(200).send({
+            success: true,
+            message: "Signed In successfully",
+            data: {
+                token: token,
+                user: user
+            }
+        })
+    } catch (e) {
+        next(e);
+    }
+}
+
+export const logoutAllController = async (req, res, next) => {
+    try {
+        let user = await UserMode.findById(req.user._id);
+
+        user.tokenVersion += 1;
+        await user.save();
+
+        res.status(200).send({
+            success: true,
+            message: "Logged Out of all devices successfully"
+        })
+    } catch (e) {
+        next(e);
+    }
+}
+
