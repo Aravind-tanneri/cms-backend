@@ -514,6 +514,55 @@ Not Required
 
 ---
 
+# FACULTY
+
+---
+
+## Create Faculty
+
+```
+POST /api/v1/faculties
+```
+
+### Authentication
+
+Not Required
+
+### Request Body
+
+```json
+{
+    "name": "Faculty Test2",
+    "dept": "CSE"
+}
+```
+
+### Response
+
+```json
+{
+    "success": true,
+    "message": "Faculty created successfully",
+    "data": {
+        "faculty": {
+            "name": "Faculty Test2",
+            "dept": "CSE",
+            "_id": "6a5768ec73d4eb3b094835a9",
+            "createdAt": "2026-07-15T11:03:08.040Z",
+            "updatedAt": "2026-07-15T11:03:08.040Z",
+            "__v": 0
+        }
+    }
+}
+```
+
+### Notes
+
+*
+
+
+---
+
 
 # SUBJECT
 
@@ -539,6 +588,20 @@ subjectId
 
 ```json
 {
+    "success": true,
+    "message": "Subject Found",
+    "data": {
+        "subject": {
+            "_id": "6a576c01e498e5d967e02db9",
+            "name": "Subejct Test2",
+            "facultyId": "6a5768c773d4eb3b094835a7",
+            "credits": 3,
+            "groupId": "6a5632a7afae49887f9e5b5d",
+            "createdAt": "2026-07-15T11:16:17.940Z",
+            "updatedAt": "2026-07-15T11:16:17.940Z",
+            "__v": 0
+        }
+    }
 }
 ```
 
@@ -563,8 +626,34 @@ Required
 ### Response
 
 ```json
-[
-]
+{
+    "success": true,
+    "message": "Subjects Found",
+    "data": {
+        "subjects": [
+            {
+                "_id": "6a576c01e498e5d967e02db9",
+                "name": "Subejct Test10",
+                "facultyId": "6a5768c773d4eb3b094835a7",
+                "credits": 0,
+                "groupId": "6a5632a7afae49887f9e5b5d",
+                "createdAt": "2026-07-15T11:16:17.940Z",
+                "updatedAt": "2026-07-15T14:54:22.381Z",
+                "__v": 0
+            },
+            {
+                "_id": "6a576c3ae498e5d967e02dba",
+                "name": "Subejct Test3",
+                "facultyId": "6a5768c773d4eb3b094835a7",
+                "credits": 3,
+                "groupId": "6a5632a7afae49887f9e5b5d",
+                "createdAt": "2026-07-15T11:17:14.282Z",
+                "updatedAt": "2026-07-15T11:17:14.282Z",
+                "__v": 0
+            }
+        ]
+    }
+}
 ```
 
 ---
@@ -582,7 +671,11 @@ Required
 ### Request Body
 
 ```json
-{
+{ 
+    "name": "Subejct Test3", 
+    "facultyId": "6a5768c773d4eb3b094835a7",
+    "credits": 3,
+    "moderatorId": "6a567e0de3426001b74d7292"
 }
 ```
 
@@ -590,6 +683,20 @@ Required
 
 ```json
 {
+    "success": true,
+    "message": "Subejct created successfully",
+    "data": {
+        "subject": {
+            "name": "Subejct Test3",
+            "facultyId": "6a5768c773d4eb3b094835a7",
+            "credits": 3,
+            "groupId": "6a5632a7afae49887f9e5b5d",
+            "_id": "6a576c3ae498e5d967e02dba",
+            "createdAt": "2026-07-15T11:17:14.282Z",
+            "updatedAt": "2026-07-15T11:17:14.282Z",
+            "__v": 0
+        }
+    }
 }
 ```
 
@@ -608,7 +715,10 @@ Required
 ### Request Body
 
 ```json
-{
+{ 
+    "name": "Subejct Test10", 
+    "facultyId": "6a5768c773d4eb3b094835a7",
+    "credits": 0
 }
 ```
 
@@ -616,6 +726,20 @@ Required
 
 ```json
 {
+    "success": true,
+    "message": "Subject Updated successfully",
+    "data": {
+        "subject": {
+            "_id": "6a576c01e498e5d967e02db9",
+            "name": "Subejct Test10",
+            "facultyId": "6a5768c773d4eb3b094835a7",
+            "credits": 0,
+            "groupId": "6a5632a7afae49887f9e5b5d",
+            "createdAt": "2026-07-15T11:16:17.940Z",
+            "updatedAt": "2026-07-15T14:54:22.381Z",
+            "__v": 0
+        }
+    }
 }
 ```
 
@@ -635,6 +759,20 @@ Required
 
 ```json
 {
+    "success": true,
+    "message": "Subject deleted successfully",
+    "data": {
+        "subject": {
+            "_id": "6a576aa4501ac19f16fcf2ee",
+            "name": "Subejct Test",
+            "facultyId": "6a5768c773d4eb3b094835a7",
+            "credits": 3,
+            "groupId": "6a5632a7afae49887f9e5b5d",
+            "createdAt": "2026-07-15T11:10:28.551Z",
+            "updatedAt": "2026-07-15T11:10:28.551Z",
+            "__v": 0
+        }
+    }
 }
 ```
 
