@@ -27,7 +27,7 @@ The backend provides functionality for:
 # Base URL
 
 ```
-
+https://class-management-backend-53hu.onrender.com/
 ```
 
 ---
@@ -411,15 +411,16 @@ Not Required
 
 ---
 
-## Logout
+
+## Logout All
 
 ```
-POST /api/v1/auth/logout
+POST /api/v1/auth/logout-all
 ```
 
 ### Authentication
 
-Required
+Token Required
 
 ### Request Body
 
@@ -432,25 +433,35 @@ Required
 
 ```json
 {
+    "success": true,
+    "message": "Logged Out of all devices successfully"
 }
 ```
 
+### Notes
+
+*
+
 ---
 
-## Refresh Token
+
+## Forgot Password
 
 ```
-POST /api/v1/auth/refresh
+POST /api/v1/auth/forgot-password
 ```
 
 ### Authentication
 
-Refresh Token Required
+Not Required
 
 ### Request Body
 
 ```json
 {
+    "email": "user@gmail.com",
+    "otp": "756910",
+    "password": "newPassword"
 }
 ```
 
@@ -458,10 +469,17 @@ Refresh Token Required
 
 ```json
 {
+    "success": true,
+    "message": "Updated Password"
 }
 ```
 
+### Notes
+
+*
+
 ---
+
 
 # SUBJECT
 
