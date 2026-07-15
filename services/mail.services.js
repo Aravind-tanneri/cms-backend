@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import { EMAIL, APP_PASSWORD } from '../config/env.js'
 import ApiError from "../classes/apiError.class.js";
 
-const transporter = nodemailer.createTransport({
+export const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: EMAIL,
