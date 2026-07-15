@@ -56,10 +56,15 @@ export const registerController = async (req, res, next) => {
             throw new ApiError(400, 'Incorrect OTP');
         }
 
-        const dbGroup = await GroupModel.findOne(group).session(session);
+        let dbGroup = await GroupModel.findOne(group).session(session);
 
         if (!dbGroup) {
-            throw new ApiError(404, "Group not found");
+            dbGroup = new GroupModel({
+                year: Number(group.year),
+                dept: group.dept,
+                sec: group.sec
+            });
+            await dbGroup.save({ session });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
