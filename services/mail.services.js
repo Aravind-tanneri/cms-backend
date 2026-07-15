@@ -1,19 +1,20 @@
 import nodemailer from 'nodemailer';
-import { EMAIL, APP_PASSWORD } from '../config/env.js'
-import ApiError from "../classes/apiError.class.js";
+import {EMAIL, APP_PASSWORD, BREVO_LOGIN, BREVO_SMTP_KEY, FROM_EMAIL} from '../config/env.js'
 
 export const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: "smtp-relay.brevo.com",
+    port: 587,
+    secure: false,
     auth: {
-        user: EMAIL,
-        pass: APP_PASSWORD
+        user: BREVO_LOGIN,
+        pass: BREVO_SMTP_KEY
     }
-})
+});
 
 export const sendOtpMail = async (email, otp) => {
     try {
         await transporter.sendMail({
-            from: `"ClassSync" <${EMAIL}>`,
+            from: `"Class Management" <${FROM_EMAIL}>`,
             to: email,
             subject: "Email Verification",
             html: `
