@@ -4,15 +4,17 @@ import {
     logInController,
     logoutAllController,
     registerController,
-    sendOtpController
+    sendOtpController, verifyOtpController
 } from "../controllers/auth.controller.js";
+import {authMiddleware} from "../middlewares/auth.middleware.js";
 
 const authRouter = Router();
 
 authRouter.post('/send-otp', sendOtpController);
 authRouter.post('/register', registerController);
 authRouter.post('/login', logInController);
-authRouter.post('/logout-all', logoutAllController);
+authRouter.post('/logout-all', authMiddleware, logoutAllController);
 authRouter.post('/forgot-password', forgotPasswordController);
+authRouter.post('/verify-otp', verifyOtpController);
 
 export default authRouter;

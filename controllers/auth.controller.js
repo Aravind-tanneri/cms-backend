@@ -12,10 +12,6 @@ export const sendOtpController = async (req, res, next) => {
     try {
         const { email } = req.body;
 
-        if (await UserModel.exists({ email })) {
-            throw new ApiError(409, "User already exists");
-        }
-
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
         const hashedOtp = await bcrypt.hash(otp, 10);
@@ -188,5 +184,35 @@ export const forgotPasswordController = async (req, res, next) => {
         next(e);
     } finally {
         await session.endSession()
+    }
+}
+
+export const verifyOtpController = async (req, res, next) => {
+    try {
+        const { email, otp } = req.body;
+
+        if (!email || !otp) {
+            throw new ApiError(400, "Missing required fields");
+        }
+
+
+        const dbOtp = await OtpModel.findOne({ email });
+
+        if (!dbOtp) {
+            throw new ApiError(400, "OTP expired or not found");
+        }
+
+        const isOtpMatching = await bcrypt.compare(otp, dbOtp.otp);
+
+        if(!isOtpMatching) {
+            throw new ApiError(400, 'Incorrect OTP');
+        }
+
+        res.status(201).send({
+            success: true,
+            message: "OTP Verified Successfully"
+        })
+    } catch (e) {
+        next(e);
     }
 }
