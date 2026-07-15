@@ -5,7 +5,8 @@ const facultySchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: [25, "Maximum length: 25"]
+        maxlength: [25, "Maximum length: 25"],
+        unique: true
     },
     dept: {
         type: String,

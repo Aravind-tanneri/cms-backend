@@ -8,7 +8,7 @@ const groupSchema = new mongoose.Schema({
     dept: {
         type: String,
         required: true,
-        enum: ['CSE', 'ECE', 'EEE', 'CIVIL', 'MECH', 'BIOTECH', 'CHEM']
+        enum: ['CSE', 'ECE', 'EEE', 'CIVIL', 'MEC', 'BTH', 'CHEM']
     },
     sec: {
         type: String,
