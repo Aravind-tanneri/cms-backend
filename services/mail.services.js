@@ -1,20 +1,19 @@
-import { Resend } from 'resend';
-import { RESEND_API_KEY, EMAIL } from '../config/env.js';
+import nodemailer from 'nodemailer';
+import { EMAIL, APP_PASSWORD } from '../config/env.js'
 import ApiError from "../classes/apiError.class.js";
 
-const resend = new Resend(RESEND_API_KEY || 'placeholder_key');
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: EMAIL,
+        pass: APP_PASSWORD
+    }
+})
 
 export const sendOtpMail = async (email, otp) => {
-    if (!RESEND_API_KEY) {
-        throw new ApiError(500, "Email service configuration is missing (RESEND_API_KEY).");
-    }
-
     try {
-        // Resend's free tier requires using "onboarding@resend.dev" as the sender unless you verify a custom domain.
-        const fromAddress = "onboarding@resend.dev";
-        
-        const { data, error } = await resend.emails.send({
-            from: `ClassSync <${fromAddress}>`,
+        await transporter.sendMail({
+            from: `"ClassSync" <${EMAIL}>`,
             to: email,
             subject: "Email Verification",
             html: `
@@ -30,10 +29,6 @@ export const sendOtpMail = async (email, otp) => {
                 <p>If you didn't request this, you can safely ignore this email.</p>
             `
         });
-
-        if (error) {
-            throw new ApiError(500, error.message || "Failed to send email via Resend");
-        }
     } catch (err) {
         throw err;
     }

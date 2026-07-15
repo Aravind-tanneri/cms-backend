@@ -10,6 +10,5 @@ export const {
     APP_PASSWORD,
     JWT_SECRET,
     JWT_EXPIRES_IN,
-    RENDER_URL,
-    RESEND_API_KEY
+    RENDER_URL
 } = process.env;
